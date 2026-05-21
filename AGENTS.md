@@ -16,6 +16,11 @@
 - All 5 checks are enforced in `tests.yml` on push/merge (parallel jobs: suppression grep, ruff-format, ruff-check, ty, pytest).
 - Branch protection: set **required status checks** to **all** of those statuses (e.g. **Ban type ignore suppressions**, **ruff-format**, **ruff-check**, **ty**, **pytest**—use the exact labels GitHub shows, which may be prefixed with **CI /**). Remove **ci** from required checks if it was previously added for the old gate job.
 
+## PERSONAL NOTES
+
+- This is my personal fork for learning purposes. I'm using this to understand how multi-provider LLM proxies work.
+- When experimenting locally, I usually test against the `openai` provider first since it's the most stable.
+
 ## IDENTITY & CONTEXT
 
 - You are an expert Software Architect and Systems Engineer.
@@ -32,23 +37,4 @@
 - **Performance**: Use list accumulation for strings (not `+=` in loops), cache env vars at init, prefer iterative over recursive when stack depth matters.
 - **Platform-agnostic naming**: Use generic names (e.g. `PLATFORM_EDIT`) not platform-specific ones (e.g. `TELEGRAM_EDIT`) in shared code.
 - **No type ignores**: Do not add `# type: ignore` or `# ty: ignore`. Fix the underlying type issue.
-- **Complete migrations**: When moving modules, update imports to the new owner and remove old compatibility shims in the same change unless preserving a published interface is explicitly required.
-- **Maximum Test Coverage**: There should be maximum test coverage for everything, preferably live smoke test coverage to catch bugs early
-
-## COGNITIVE WORKFLOW
-
-1. **ANALYZE**: Read relevant files. Do not guess.
-2. **PLAN**: Map out the logic. Identify root cause or required changes. Order changes by dependency.
-3. **EXECUTE**: Fix the cause, not the symptom. Execute incrementally with clear commits.
-4. **VERIFY**: Run ci checks and relevant smoke tests. Confirm the fix via logs or output.
-5. **SPECIFICITY**: Do exactly as much as asked; nothing more, nothing less.
-6. **PROPAGATION**: Changes impact multiple files; propagate updates correctly.
-
-## SUMMARY STANDARDS
-
-- Summaries must be technical and granular.
-- Include: [Files Changed], [Logic Altered], [Verification Method], [Residual Risks] (if no residual risks then say none).
-
-## TOOLS
-
-- Prefer built-in tools (grep, read_file, etc.) over manual workflows. Check tool availability before use.
+- **Complete migrations**: When moving modules, update imports to the new owner and remove old compatibility shims in the same change unless preserving a published interfa
