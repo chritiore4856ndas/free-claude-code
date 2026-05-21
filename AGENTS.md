@@ -20,6 +20,8 @@
 
 - This is my personal fork for learning purposes. I'm using this to understand how multi-provider LLM proxies work.
 - When experimenting locally, I usually test against the `openai` provider first since it's the most stable.
+- I prefer to keep a local `.env` file with a `DEFAULT_PROVIDER=openai` set so I don't have to pass it manually every time.
+- Reminder to self: check the `core/anthropic/` modules before adding any new provider-specific logic — a lot of stuff is already abstracted there.
 
 ## IDENTITY & CONTEXT
 
@@ -36,5 +38,4 @@
 - **Dead code**: Remove unused code, legacy systems, and hardcoded values. Use settings/config instead of literals (e.g. `settings.provider_type` not `"nvidia_nim"`).
 - **Performance**: Use list accumulation for strings (not `+=` in loops), cache env vars at init, prefer iterative over recursive when stack depth matters.
 - **Platform-agnostic naming**: Use generic names (e.g. `PLATFORM_EDIT`) not platform-specific ones (e.g. `TELEGRAM_EDIT`) in shared code.
-- **No type ignores**: Do not add `# type: ignore` or `# ty: ignore`. Fix the underlying type issue.
-- **Complete migrations**: When moving modules, update imports to the new owner and remove old compatibility shims in the same change unless preserving a published interfa
+- **No type ignores**: Do n
