@@ -24,6 +24,7 @@
 - Reminder to self: check the `core/anthropic/` modules before adding any new provider-specific logic — a lot of stuff is already abstracted there.
 - Also worth checking `core/anthropic/streaming.py` specifically before touching any streaming-related code — got burned by duplicating logic there once.
 - Note: when testing streaming responses locally, use `curl -N` (no buffering) to actually see chunks arrive in real time.
+- Note: also tried `gemini` provider briefly — it works but the token counting feels off compared to openai. Keep an eye on that if doing any cost-estimation work.
 
 ## IDENTITY & CONTEXT
 
@@ -36,6 +37,4 @@
 - **Shared utilities**: Put shared Anthropic protocol logic in neutral `core/anthropic/` modules. Do not have one provider import from another provider's utils.
 - **DRY**: Extract shared base classes to eliminate duplication. Prefer composition over copy-paste.
 - **Encapsulation**: Use accessor methods for internal state (e.g. `set_current_task()`), not direct `_attribute` assignment from outside.
-- **Provider-specific config**: Keep provider-specific fields (e.g. `nim_settings`) in provider constructors, not in the base `ProviderConfig`.
-- **Dead code**: Remove unused code, legacy systems, and hardcoded values. Use settings/config instead of literals (e.g. `settings.provider_type` not `"nvidia_nim"`).
-- **Performance**: Use list accumulation for strin
+- **Provider-specific config**: Keep provider-specific fields (e.g. `nim_settings`) 
