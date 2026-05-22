@@ -22,6 +22,8 @@
 - When experimenting locally, I usually test against the `openai` provider first since it's the most stable.
 - I prefer to keep a local `.env` file with a `DEFAULT_PROVIDER=openai` set so I don't have to pass it manually every time.
 - Reminder to self: check the `core/anthropic/` modules before adding any new provider-specific logic — a lot of stuff is already abstracted there.
+- Also worth checking `core/anthropic/streaming.py` specifically before touching any streaming-related code — got burned by duplicating logic there once.
+- Note: when testing streaming responses locally, use `curl -N` (no buffering) to actually see chunks arrive in real time.
 
 ## IDENTITY & CONTEXT
 
@@ -36,6 +38,4 @@
 - **Encapsulation**: Use accessor methods for internal state (e.g. `set_current_task()`), not direct `_attribute` assignment from outside.
 - **Provider-specific config**: Keep provider-specific fields (e.g. `nim_settings`) in provider constructors, not in the base `ProviderConfig`.
 - **Dead code**: Remove unused code, legacy systems, and hardcoded values. Use settings/config instead of literals (e.g. `settings.provider_type` not `"nvidia_nim"`).
-- **Performance**: Use list accumulation for strings (not `+=` in loops), cache env vars at init, prefer iterative over recursive when stack depth matters.
-- **Platform-agnostic naming**: Use generic names (e.g. `PLATFORM_EDIT`) not platform-specific ones (e.g. `TELEGRAM_EDIT`) in shared code.
-- **No type ignores**: Do n
+- **Performance**: Use list accumulation for strin
